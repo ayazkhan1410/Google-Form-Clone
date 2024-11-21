@@ -9,10 +9,14 @@ class BaseModel(models.Model):
         abstract = True
     
 class Choice(BaseModel):
-    choice = models.CharField(max_length=200, null=True, blank=True)
+    choice = models.CharField(max_length=200)
     
     def __str__(self):
         return self.choice
+    
+    class Meta:
+        ordering = ['id']
+
 
 QUESTION_CHOICE = (
     ('Short answer', "Short answer"),
@@ -24,9 +28,12 @@ class Question(BaseModel):
     question = models.CharField(max_length=255, null=True, blank=True)
     question_type = models.CharField(max_length=255, choices=QUESTION_CHOICE)
     choices = models.ManyToManyField(Choice, related_name='question_choices', blank=True)
-    
+
     def __str__(self):
         return f"{self.question} - {self.question_type}"
+
+    class Meta:
+        ordering = ["id"]
 
 class Form(BaseModel):
     code = models.CharField(max_length=255, unique=True)
@@ -36,3 +43,6 @@ class Form(BaseModel):
 
     def __str__(self):
         return f"{self.title} - {self.creator}"
+    
+    class Meta:
+        ordering = ["id"]

@@ -9,13 +9,13 @@ class ChoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'question', 'question_type', 'created_at', 'updated_at')
+    list_display = ('question', 'question_type', 'created_at', 'updated_at')
     search_fields = ('question', 'question_type')
     list_filter = ('question_type', 'created_at')
 
 @admin.register(Form)
 class FormAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'code', 'creator', 'created_at', 'updated_at')
+    list_display = ('title', 'code', 'creator', 'created_at', 'updated_at')
     search_fields = ('title', 'code', 'creator__username')
     list_filter = ('created_at', 'creator')
     filter_horizontal = ('question',)  # For ManyToMany fields
